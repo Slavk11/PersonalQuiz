@@ -31,7 +31,7 @@ final class QuestionViewController: UIViewController {
     private var currentAnswers: [Answer] {
         questions[questionIndex].answers
     }
-    
+   
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,12 @@ final class QuestionViewController: UIViewController {
         rangedSlider.maximumValue = answerCount
         rangedSlider.value = answerCount / 2
     }
+    
+    // MARK: - Set the data on the destination
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let resultVC = segue.destination as? ResultViewController else { return }
+        resultVC.answers = answersChosen
+   }
 
     // MARK: - IB Actions
     @IBAction func singleButtonAnswerPressed(_ sender: UIButton) {
@@ -68,6 +74,8 @@ final class QuestionViewController: UIViewController {
     deinit {
         print("\(type(of: self)) has been deallocated")
     }
+    
+     
 }
 
 // MARK: - Private Methods
