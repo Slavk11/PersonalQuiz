@@ -9,31 +9,45 @@ import UIKit
 
 final class ResultViewController: UIViewController {
     
-    @IBOutlet var totalResult: UILabel!
+    @IBOutlet var animalTypeLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
     
     var answers: [Answer]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setHidesBackButton(true, animated: true)
+        navigationItem.hidesBackButton = true
+        updateResult()
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
     
-    func getFinalResult() {
-        var animals: [Animal: Int] = [:]
-        let totalAnswers = answers.map { $0.animal}
+    private func updateResult() {
+        var frequencyOfAnimals: [Animal: Int] = [:]
+        let animals = answers.map { $0.animal }
         
-        for answer in totalAnswers {
-            animals[answer] = animals[answer]
+        for animal in animals {
+            if let animalTypeCount = frequencyOfAnimals[animal] {
+                frequencyOfAnimals.updateValue(animalTypeCount + 1, forKey: animal)
+            } else {
+                frequencyOfAnimals[animal] = 1
+            }
+            let sortedFrequentOfAnimals = frequencyOfAnimals.sorted { $0.value > $1.value }
+            guard let mostFrequentAnimal = sortedFrequentOfAnimals.first?.key else { return }
+            
+            updateUI(with: mostFrequentAnimal)
         }
+        
     }
     
-    deinit {
-        print("\(type(of: self)) has been deallocated")
+    private func updateUI(with animal: Animal) {
+        animalTypeLabel.text = "Вы - \(animal.rawValue)!"
+        descriptionLabel.text = animal.definition
+        
+        
     }
     
    
