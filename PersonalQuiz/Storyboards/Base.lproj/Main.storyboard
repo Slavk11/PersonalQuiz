@@ -332,7 +332,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="totalResult" destination="7HZ-kD-hK7" id="gJM-SH-zpB"/>
+                        <outlet property="animalTypeLabel" destination="7HZ-kD-hK7" id="S4X-xa-nMx"/>
+                        <outlet property="descriptionLabel" destination="JWd-aX-Vj8" id="VFK-OI-G34"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G1v-Tj-vne" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
